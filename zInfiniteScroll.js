@@ -7,13 +7,13 @@
             restrict: 'A',
             link: function link($scope, $element, $attr) {
                 var lengthThreshold = $attr.scrollThreshold || 50,
-                    timeThreshold   = $attr.timeThreshold || 200,
-                    handler         = $scope.$eval($attr.zInfiniteScroll),
-                    bodyScroll      = $scope.$eval($attr.bodyScroll) === true ? true : false,
-                    inverse         = $scope.$eval($attr.inverse) === true ? true : false,
-                    promise         = null,
-                    lastScrolled    = 9999,
-                    element         = $element[0],
+                    timeThreshold = $attr.timeThreshold || 200,
+                    handler = $scope.$eval($attr.zInfiniteScroll),
+                    bodyScroll = $scope.$eval($attr.bodyScroll) === true ? true : false,
+                    inverse = $scope.$eval($attr.inverse) === true ? true : false,
+                    promise = null,
+                    lastScrolled = 9999,
+                    element = $element[0],
                     scrollEvent,
                     isDestorying = false;
 
@@ -53,8 +53,8 @@
                     // if we have reached the threshold and we scroll up
                     if (scrolled < lengthThreshold && (scrolled - lastScrolled) < 0 && (element.scrollHeight >= element.clientHeight)) {
                         var originalHeight = element.scrollHeight;
-                        $scope.$apply(handler).then(function() {
-                            $timeout(function() {
+                        $scope.$apply(handler).then(function () {
+                            $scope.$watch('vm.messages', function () {
                                 element.scrollTop = element.scrollHeight - originalHeight;
                             });
                         });
